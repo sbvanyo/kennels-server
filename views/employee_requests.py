@@ -12,7 +12,7 @@ def get_all_employees():
 # Function with a single parameter
 def get_single_employee(id):
     # Variable to hold the found employee, if it exists
-    requested_location = None
+    requested_employee = None
 
     # Iterate the EMPLOYEES list above. Very similar to the
     # for..of loops you used in JavaScript.

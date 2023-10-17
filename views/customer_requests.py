@@ -12,7 +12,7 @@ def get_all_customers():
 # Function with a single parameter
 def get_single_customer(id):
     # Variable to hold the found customer, if it exists
-    requested_location = None
+    requested_customer = None
 
     # Iterate the CUSTOMERS list above. Very similar to the
     # for..of loops you used in JavaScript.
