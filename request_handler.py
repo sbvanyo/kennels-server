@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_animals, get_single_animal, create_animal, get_all_locations, get_single_location, create_location, get_all_employees, get_single_employee, get_all_customers, get_single_customer
+from views import get_all_animals, get_single_animal, create_animal, get_all_locations, get_single_location, create_location, get_all_employees, get_single_employee, create_employee, get_all_customers, get_single_customer, create_customer
 import json
 
 # Here's a class. It inherits from another class.
@@ -83,6 +83,18 @@ class HandleRequests(BaseHTTPRequestHandler):
             response = get_all_animals()
         else:
             response = []
+        if self.path == "/locations":
+            response = get_all_locations()
+        else:
+            response = []
+        if self.path == "/employees":
+            response = get_all_employees()
+        else:
+            response = []
+        if self.path == "/customers":
+            response = get_all_customers()
+        else:
+            response = []
 
         # This weird code sends a response back to the client
         self.wfile.write(f"{response}".encode())
@@ -103,6 +115,8 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Initialize new animal
         new_animal = None
         new_location = None
+        new_employee = None
+        new_customer = None
 
         # Add a new animal to the list. Don't worry about
         # the orange squiggle, you'll define the create_animal
@@ -111,10 +125,16 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_animal = create_animal(post_body)
         if resource == "locations":
             new_location = create_location(post_body)
+        if resource == "employees":
+            new_employee = create_employee(post_body)
+        if resource == "customers":
+            new_customer = create_customer(post_body)
 
         # Encode the new animal and send in response
         self.wfile.write(json.dumps(new_animal).encode())
         self.wfile.write(json.dumps(new_location).encode())
+        self.wfile.write(json.dumps(new_employee).encode())
+        self.wfile.write(json.dumps(new_customer).encode())
            
     # Here's a method on the class that overrides the parent's method.
     # It handles any PUT request.
