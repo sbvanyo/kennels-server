@@ -59,13 +59,13 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             else:
                 response = get_all_animals()
-         
+
         if resource == "locations":
             if id is not None:
                 response = get_single_location(id)
 
             else:
-                response = get_all_locations()                 
+                response = get_all_locations()
         if resource == "employees":
             if id is not None:
                 response = get_single_employee(id)
@@ -107,6 +107,7 @@ class HandleRequests(BaseHTTPRequestHandler):
     # Here's a method on the class that overrides the parent's method.
     # It handles any POST request.
     def do_POST(self):
+        """Handles POST requests to the server"""
         self._set_headers(201)
         content_len = int(self.headers.get('content-length', 0))
         post_body = self.rfile.read(content_len)
@@ -140,7 +141,7 @@ class HandleRequests(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(new_location).encode())
             self.wfile.write(json.dumps(new_employee).encode())
             self.wfile.write(json.dumps(new_customer).encode())
-           
+
     # Here's a method on the class that overrides the parent's method.
     # It handles any PUT request.
 
@@ -168,9 +169,10 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Encode the new animal and send in response
         self.wfile.write("".encode())
         self.do_POST()
-    
-    
+
+
     def do_DELETE(self):
+        """Handles DELETE requests to the server"""
         # Set a 204 response code
         self._set_headers(204)
 
@@ -189,9 +191,10 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         # Encode the new animal and send in response
         self.wfile.write("".encode())
-        
+
 
     def parse_url(self, path):
+        """Splits the url into its various parts"""
     # Just like splitting a string in JavaScript. If the
     # path is "/animals/1", the resulting list will
     # have "" at index 0, "animals" at index 1, and "1"

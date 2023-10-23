@@ -14,11 +14,13 @@ LOCATIONS = [
 ]
 
 def get_all_locations():
+    """Fetches all locations"""
     return LOCATIONS
 
 
 # Function with a single parameter
 def get_single_location(id):
+    """Fetches single location"""
     # Variable to hold the found location, if it exists
     requested_location = None
 
@@ -33,6 +35,7 @@ def get_single_location(id):
     return requested_location
 
 def create_location(location):
+    """Adds a location to the list"""
     # Get the id value of the last location in the list
     max_id = LOCATIONS[-1]["id"]
 
@@ -49,6 +52,7 @@ def create_location(location):
     return location
 
 def delete_location(id):
+    """Removes a location from the list"""
     # Initial -1 value for location index, in case one isn't found
     location_index = -1
 
@@ -64,6 +68,7 @@ def delete_location(id):
         LOCATIONS.pop(location_index)
 
 def update_location(id, new_location):
+    """Updates the value of a list item"""
     # Iterate the LOCATIONS list, but use enumerate() so that
     # you can access the index value of each item.
     for index, location in enumerate(LOCATIONS):

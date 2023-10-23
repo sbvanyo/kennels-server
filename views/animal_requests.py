@@ -25,13 +25,14 @@ ANIMALS = [
     }
 ]
 
-
 def get_all_animals():
+    """Fetch all animals"""
     return ANIMALS
 
 
 # Function with a single parameter
 def get_single_animal(id):
+    """Fetch single animal"""
     # Variable to hold the found animal, if it exists
     requested_animal = None
 
@@ -46,6 +47,7 @@ def get_single_animal(id):
     return requested_animal
 
 def create_animal(animal):
+    """Adds an animal to the list"""
     # Get the id value of the last animal in the list
     max_id = ANIMALS[-1]["id"]
 
@@ -62,6 +64,7 @@ def create_animal(animal):
     return animal
 
 def delete_animal(id):
+    """Removes an animal from the list"""
     # Initial -1 value for animal index, in case one isn't found
     animal_index = -1
 
@@ -78,6 +81,7 @@ def delete_animal(id):
 
 
 def update_animal(id, new_animal):
+    """Updates the value of a list item"""
     # Iterate the ANIMALS list, but use enumerate() so that
     # you can access the index value of each item.
     for index, animal in enumerate(ANIMALS):
