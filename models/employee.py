@@ -1,7 +1,8 @@
 class Employee():
     """Initializes class for employees"""
 
-    def __init__(self, id, name, status):
+    def __init__(self, id, name, address, location_id):
         self.id = id
         self.name = name
-        self.status = status
+        self.address = address
+        self.location_id = location_id
