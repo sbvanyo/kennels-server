@@ -169,3 +169,66 @@ def get_single_animal(id):
                             data['customer_id'])
 
         return animal.__dict__
+
+
+
+
+        
+def get_animal_by_location_id(location_id):
+    """Fetches the animal whose location id matches the location id passed in"""
+
+    with sqlite3.connect("./kennel.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        # Write the SQL query to get the information you want
+        db_cursor.execute("""
+        select
+            c.id,
+            c.name,
+            c.breed,
+            c.status,
+            c.customer_id,
+            c.location_id
+        from Animal c
+        WHERE c.location_id = ?
+        """, ( location_id, ))
+
+        animals = []
+        dataset = db_cursor.fetchall()
+
+        for row in dataset:
+            animal = Animal(row['id'], row['name'], row['breed'], row['status'] , row['customer_id'], row['location_id'])
+            animals.append(animal.__dict__)
+
+    return animals
+
+
+def get_animal_by_status(status):
+    """Fetches the animal whose location id matches the status passed in"""
+
+    with sqlite3.connect("./kennel.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        # Write the SQL query to get the information you want
+        db_cursor.execute("""
+        select
+            c.id,
+            c.name,
+            c.breed,
+            c.status,
+            c.customer_id,
+            c.location_id
+        from Animal c
+        WHERE c.status = ?
+        """, ( status, ))
+
+        animals = []
+        dataset = db_cursor.fetchall()
+
+        for row in dataset:
+            animal = Animal(row['id'], row['name'], row['breed'], row['status'] , row['customer_id'], row['location_id'])
+            animals.append(animal.__dict__)
+
+    return animals
