@@ -67,21 +67,21 @@ def create_animal(animal):
     # Return the dictionary with `id` property added
     return animal
 
-def delete_animal(id):
-    """Removes an animal from the list"""
-    # Initial -1 value for animal index, in case one isn't found
-    animal_index = -1
+# def delete_animal(id):
+#     """Removes an animal from the list"""
+#     # Initial -1 value for animal index, in case one isn't found
+#     animal_index = -1
 
-    # Iterate the ANIMALS list, but use enumerate() so that you
-    # can access the index value of each item
-    for index, animal in enumerate(ANIMALS):
-        if animal["id"] == id:
-            # Found the animal. Store the current index.
-            animal_index = index
+#     # Iterate the ANIMALS list, but use enumerate() so that you
+#     # can access the index value of each item
+#     for index, animal in enumerate(ANIMALS):
+#         if animal["id"] == id:
+#             # Found the animal. Store the current index.
+#             animal_index = index
 
-    # If the animal was found, use pop(int) to remove it from list
-    if animal_index >= 0:
-        ANIMALS.pop(animal_index)
+#     # If the animal was found, use pop(int) to remove it from list
+#     if animal_index >= 0:
+#         ANIMALS.pop(animal_index)
 
 
 def update_animal(id, new_animal):
@@ -112,8 +112,8 @@ def get_all_animals():
             a.name,
             a.breed,
             a.status,
-            a.location_id,
-            a.customer_id
+            a.customer_id,
+            a.location_id
         FROM animal a
         """)
 
@@ -131,8 +131,8 @@ def get_all_animals():
             # exact order of the parameters defined in the
             # Animal class above.
             animal = Animal(row['id'], row['name'], row['breed'],
-                            row['status'], row['location_id'],
-                            row['customer_id'])
+                            row['status'], row['customer_id'],
+                            row['location_id'])
 
             animals.append(animal.__dict__) # see the notes below for an explanation on this line of code.
 
@@ -154,8 +154,8 @@ def get_single_animal(id):
             a.name,
             a.breed,
             a.status,
-            a.location_id,
-            a.customer_id
+            a.customer_id,
+            a.location_id
         FROM animal a
         WHERE a.id = ?
         """, ( id, ))
@@ -165,8 +165,8 @@ def get_single_animal(id):
 
         # Create an animal instance from the current row
         animal = Animal(data['id'], data['name'], data['breed'],
-                            data['status'], data['location_id'],
-                            data['customer_id'])
+                            data['status'], data['customer_id'],
+                            data['location_id'])
 
         return animal.__dict__
 
@@ -232,3 +232,14 @@ def get_animal_by_status(status):
             animals.append(animal.__dict__)
 
     return animals
+
+
+def delete_animal(id):
+    """Removes an animal from the list"""
+    with sqlite3.connect("./kennel.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        DELETE FROM animal
+        WHERE id = ?
+        """, (id, ))

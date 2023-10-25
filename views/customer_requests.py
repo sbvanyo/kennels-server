@@ -47,21 +47,21 @@ def create_customer(customer):
     # Return the dictionary with `id` property added
     return customer
 
-def delete_customer(id):
-    """Removes a customer from the list"""
-    # Initial -1 value for customer index, in case one isn't found
-    customer_index = -1
+# def delete_customer(id):
+#     """Removes a customer from the list"""
+#     # Initial -1 value for customer index, in case one isn't found
+#     customer_index = -1
 
-    # Iterate the CUSTOMERS list, but use enumerate() so that you
-    # can access the index value of each item
-    for index, customer in enumerate(CUSTOMERS):
-        if customer["id"] == id:
-            # Found the customer. Store the current index.
-            customer_index = index
+#     # Iterate the CUSTOMERS list, but use enumerate() so that you
+#     # can access the index value of each item
+#     for index, customer in enumerate(CUSTOMERS):
+#         if customer["id"] == id:
+#             # Found the customer. Store the current index.
+#             customer_index = index
 
-    # If the customer was found, use pop(int) to remove it from list
-    if customer_index >= 0:
-        CUSTOMERS.pop(customer_index)
+#     # If the customer was found, use pop(int) to remove it from list
+#     if customer_index >= 0:
+#         CUSTOMERS.pop(customer_index)
 
 def update_customer(id, new_customer):
     """Updates the value of a list item"""
@@ -174,3 +174,15 @@ def get_customer_by_email(email):
             customers.append(customer.__dict__)
 
     return customers
+
+
+
+def delete_customer(id):
+    """Removes a customer from the list"""
+    with sqlite3.connect("./kennel.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        DELETE FROM customer
+        WHERE id = ?
+        """, (id, ))

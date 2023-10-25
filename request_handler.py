@@ -94,20 +94,20 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = get_all_customers()
 
         else: # There is a ? in the path, run the query param functions
-                (resource, query) = parsed
+            (resource, query) = parsed
 
-            # see if the query dictionary has an email key
-        if query.get('email') and resource == 'customers':
+                # see if the query dictionary has an email key
+            if query.get('email') and resource == 'customers':
                 response = get_customer_by_email(query['email'][0])
-                
-        if query.get('location_id') and resource == 'animals':
-            response = get_animal_by_location_id(query['location_id'][0])
-        
-        if query.get('location_id') and resource == 'employees':
-            response = get_employee_by_location_id(query['location_id'][0])
+                    
+            if query.get('location_id') and resource == 'animals':
+                response = get_animal_by_location_id(query['location_id'][0])
             
-        if query.get('status') and resource == 'animals':
-            response = get_animal_by_status(query['status'][0])
+            if query.get('location_id') and resource == 'employees':
+                response = get_employee_by_location_id(query['location_id'][0])
+                
+            if query.get('status') and resource == 'animals':
+                response = get_animal_by_status(query['status'][0])
 
         self.wfile.write(json.dumps(response).encode())
 
