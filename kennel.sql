@@ -71,3 +71,7 @@ SELECT
     a.name
 FROM customer a
 WHERE a.id = 3
+
+INSERT INTO `Animal` VALUES (null, "Daps", "Kennel", "Boxer", 2, 2);
+
+INSERT INTO `Employee` VALUES (null, "Stacey Vanyo", "444 Puffy Mushroom Pl", 2);
