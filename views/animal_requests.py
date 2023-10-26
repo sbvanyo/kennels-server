@@ -29,72 +29,6 @@ ANIMALS = [
     }
 ]
 
-# def get_all_animals():
-#     """Fetch all animals"""
-#     return ANIMALS
-
-
-# # Function with a single parameter
-# def get_single_animal(id):
-#     """Fetch single animal"""
-#     # Variable to hold the found animal, if it exists
-#     requested_animal = None
-
-#     # Iterate the ANIMALS list above. Very similar to the
-#     # for..of loops you used in JavaScript.
-#     for animal in ANIMALS:
-#         # Dictionaries in Python use [] notation to find a key
-#         # instead of the dot notation that JavaScript used.
-#         if animal["id"] == id:
-#             requested_animal = animal
-
-#     return requested_animal
-
-# def create_animal(animal):
-#     """Adds an animal to the list"""
-#     # Get the id value of the last animal in the list
-#     max_id = ANIMALS[-1]["id"]
-
-#     # Add 1 to whatever that number is
-#     new_id = max_id + 1
-
-#     # Add an `id` property to the animal dictionary
-#     animal["id"] = new_id
-
-#     # Add the animal dictionary to the list
-#     ANIMALS.append(animal)
-
-#     # Return the dictionary with `id` property added
-#     return animal
-
-# def delete_animal(id):
-#     """Removes an animal from the list"""
-#     # Initial -1 value for animal index, in case one isn't found
-#     animal_index = -1
-
-#     # Iterate the ANIMALS list, but use enumerate() so that you
-#     # can access the index value of each item
-#     for index, animal in enumerate(ANIMALS):
-#         if animal["id"] == id:
-#             # Found the animal. Store the current index.
-#             animal_index = index
-
-#     # If the animal was found, use pop(int) to remove it from list
-#     if animal_index >= 0:
-#         ANIMALS.pop(animal_index)
-
-
-# def update_animal(id, new_animal):
-#     """Updates the value of a list item"""
-#     # Iterate the ANIMALS list, but use enumerate() so that
-#     # you can access the index value of each item.
-#     for index, animal in enumerate(ANIMALS):
-#         if animal["id"] == id:
-#             # Found the animal. Update the value.
-#             ANIMALS[index] = new_animal
-#             break
-
-
 
 def get_all_animals():
     """Fetches all animals"""
@@ -140,9 +74,10 @@ def get_all_animals():
 
             # Create a Location instance from the current row
             location = Location(row['id'], row['location_name'], row['location_address'])
-            
+
             # Create a Location instance from the current row
-            customer = Customer(row['id'], row['customer_name'], row['customer_address'], row['customer_email'], row['customer_password'])
+            customer = Customer(row['id'], row['customer_name'], row['customer_address'],
+                                row['customer_email'], row['customer_password'])
 
             # Add the dictionary representation of the location to the animal
             animal.location = location.__dict__
@@ -186,9 +121,6 @@ def get_single_animal(id):
         return animal.__dict__
 
 
-
-
-        
 def get_animal_by_location_id(location_id):
     """Fetches the animal whose location id matches the location id passed in"""
 
@@ -213,7 +145,8 @@ def get_animal_by_location_id(location_id):
         dataset = db_cursor.fetchall()
 
         for row in dataset:
-            animal = Animal(row['id'], row['name'], row['breed'], row['status'] , row['customer_id'], row['location_id'])
+            animal = Animal(row['id'], row['name'], row['breed'],
+                            row['status'] , row['customer_id'], row['location_id'])
             animals.append(animal.__dict__)
 
     return animals
@@ -243,7 +176,8 @@ def get_animal_by_status(status):
         dataset = db_cursor.fetchall()
 
         for row in dataset:
-            animal = Animal(row['id'], row['name'], row['breed'], row['status'] , row['customer_id'], row['location_id'])
+            animal = Animal(row['id'], row['name'], row['breed'],
+                            row['status'] , row['customer_id'], row['location_id'])
             animals.append(animal.__dict__)
 
     return animals

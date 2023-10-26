@@ -9,26 +9,6 @@ CUSTOMERS = [
     }
 ]
 
-# def get_all_customers():
-#     """Fetches all customers"""
-#     return CUSTOMERS
-
-
-# # Function with a single parameter
-# def get_single_customer(id):
-#     """Fetches single customer"""
-#     # Variable to hold the found customer, if it exists
-#     requested_customer = None
-
-#     # Iterate the CUSTOMERS list above. Very similar to the
-#     # for..of loops you used in JavaScript.
-#     for customer in CUSTOMERS:
-#         # Dictionaries in Python use [] notation to find a key
-#         # instead of the dot notation that JavaScript used.
-#         if customer["id"] == id:
-#             requested_customer = customer
-
-#     return requested_customer
 
 def create_customer(customer):
     """Adds a new customer to the list"""
@@ -47,21 +27,6 @@ def create_customer(customer):
     # Return the dictionary with `id` property added
     return customer
 
-# def delete_customer(id):
-#     """Removes a customer from the list"""
-#     # Initial -1 value for customer index, in case one isn't found
-#     customer_index = -1
-
-#     # Iterate the CUSTOMERS list, but use enumerate() so that you
-#     # can access the index value of each item
-#     for index, customer in enumerate(CUSTOMERS):
-#         if customer["id"] == id:
-#             # Found the customer. Store the current index.
-#             customer_index = index
-
-#     # If the customer was found, use pop(int) to remove it from list
-#     if customer_index >= 0:
-#         CUSTOMERS.pop(customer_index)
 
 def update_customer(id, new_customer):
     """Updates the value of a list item"""
@@ -72,7 +37,6 @@ def update_customer(id, new_customer):
             # Found the customer. Update the value.
             CUSTOMERS[index] = new_customer
             break
-
 
 
 
@@ -109,9 +73,11 @@ def get_all_customers():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # customer class above.
-            customer = Customer(row['id'], row['name'], row['address'], row['email'], row['password'])
+            customer = Customer(row['id'], row['name'], row['address'],
+                                row['email'], row['password'])
 
-            customers.append(customer.__dict__) # see the notes below for an explanation on this line of code.
+            customers.append(customer.__dict__)
+            # see the notes below for an explanation on this line of code.
 
     return customers
 
@@ -139,14 +105,12 @@ def get_single_customer(id):
         data = db_cursor.fetchone()
 
         # Create an customer instance from the current row
-        customer = Customer(data['id'], data['name'], data['address'], data['email'], data['password'])
+        customer = Customer(data['id'], data['name'], data['address'],
+                            data['email'], data['password'])
 
         return customer.__dict__
-    
-    
-    
-    # TODO: you will get an error about the address on customer. Look through the customer model and requests to see if you can solve the issue.
-        
+
+
 def get_customer_by_email(email):
     """Fetches the customer whose email matches the email passed in"""
 
@@ -170,7 +134,8 @@ def get_customer_by_email(email):
         dataset = db_cursor.fetchall()
 
         for row in dataset:
-            customer = Customer(row['id'], row['name'], row['address'], row['email'] , row['password'])
+            customer = Customer(row['id'], row['name'], row['address'],
+                                row['email'] , row['password'])
             customers.append(customer.__dict__)
 
     return customers
