@@ -96,3 +96,34 @@ WHERE id = ?
 """, (new_animal['name'], new_animal['breed'],
         new_animal['status'], new_animal['customer_id'],
         new_animal['location_id'], id, ))
+
+SELECT
+    a.id,
+    a.name,
+    a.breed,
+    a.status,
+    a.location_id,
+    a.customer_id,
+    l.name location_name,
+    l.address location_address,
+		c.name customer_name,
+    c.address customer_address,
+		c.email customer_email,
+		c.password customer_pw
+FROM Location l
+JOIN Animal a
+    ON l.id = a.location_id
+JOIN Customer c
+		ON a.customer_id = c.id
+
+
+SELECT
+		e.id,
+		e.name,
+		e.address,
+		e.location_id,
+		l.name location_name,
+		l.address location_address
+FROM Employee e
+JOIN Location l
+		ON e.location_id = l.id

@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Employee
+from models import Employee, Location
 
 EMPLOYEES = [
     {
@@ -87,11 +87,15 @@ def get_all_employees():
         # Write the SQL query to get the information you want
         db_cursor.execute("""
         SELECT
-            a.id,
-            a.name,
-            a.address,
-            a.location_id
-        FROM employee a
+            e.id,
+            e.name,
+            e.address,
+            e.location_id,
+            l.name location_name,
+            l.address location_address
+        FROM Employee e
+        JOIN Location l
+		ON e.location_id = l.id
         """)
 
         # Initialize an empty list to hold all employee representations
@@ -103,13 +107,17 @@ def get_all_employees():
         # Iterate list of data returned from database
         for row in dataset:
 
-            # Create an employee instance from the current row.
-            # Note that the database fields are specified in
-            # exact order of the parameters defined in the
-            # employee class above.
+            # Create an employee instance from the current row
             employee = Employee(row['id'], row['name'], row['address'], row['location_id'])
 
-            employees.append(employee.__dict__) # see the notes below for an explanation on this line of code.
+            # Create a Location instance from the current row
+            location = Location(row['id'], row['location_name'], row['location_address'])
+
+            # Add the dictionary representation of the location to the employee
+            employee.location = location.__dict__
+
+            # Add the dictionary representation of the employee to the list
+            employees.append(employee.__dict__)
 
     return employees
 
