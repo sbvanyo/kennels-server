@@ -17,26 +17,6 @@ LOCATIONS = [
     }
 ]
 
-# def get_all_locations():
-#     """Fetches all locations"""
-#     return LOCATIONS
-
-
-# # Function with a single parameter
-# def get_single_location(id):
-#     """Fetches single location"""
-#     # Variable to hold the found location, if it exists
-#     requested_location = None
-
-#     # Iterate the LOCATIONS list above. Very similar to the
-#     # for..of loops you used in JavaScript.
-#     for location in LOCATIONS:
-#         # Dictionaries in Python use [] notation to find a key
-#         # instead of the dot notation that JavaScript used.
-#         if location["id"] == id:
-#             requested_location = location
-
-#     return requested_location
 
 def create_location(location):
     """Adds a location to the list"""
@@ -55,21 +35,6 @@ def create_location(location):
     # Return the dictionary with `id` property added
     return location
 
-# def delete_location(id):
-#     """Removes a location from the list"""
-#     # Initial -1 value for location index, in case one isn't found
-#     location_index = -1
-
-#     # Iterate the LOCATIONS list, but use enumerate() so that you
-#     # can access the index value of each item
-#     for index, location in enumerate(LOCATIONS):
-#         if location["id"] == id:
-#             # Found the location. Store the current index.
-#             location_index = index
-
-#     # If the location was found, use pop(int) to remove it from list
-#     if location_index >= 0:
-#         LOCATIONS.pop(location_index)
 
 def update_location(id, new_location):
     """Updates the value of a list item"""
@@ -80,7 +45,6 @@ def update_location(id, new_location):
             # Found the location. Update the value.
             LOCATIONS[index] = new_location
             break
-
 
 
 def get_all_locations():
@@ -116,7 +80,8 @@ def get_all_locations():
             # location class above.
             location = Location(row['id'], row['name'], row['address'])
 
-            locations.append(location.__dict__) # see the notes below for an explanation on this line of code.
+            locations.append(location.__dict__)
+            # see the notes below for an explanation on this line of code.
 
     return locations
 

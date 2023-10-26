@@ -11,7 +11,8 @@ class Animal():
         self.status = status
         self.customer_id = customer_id
         self.location_id = location_id
-        
+        self.location = None
+        self.customer = None
 
 # Classes are instantiated to create an object from its design
 new_animal = Animal(1, "Snickers", "Dog", "Recreation", 1, 4)
